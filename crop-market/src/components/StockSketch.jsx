@@ -4,18 +4,17 @@ let t
 let rn
 const StockSketch = ({ seed }) => {
   const containerRef = useRef(null);
-
+  
 
   useEffect(() => {
     const sketch = (p) => {
-      const MAX_POINTS = 500;
+      const MAX_POINTS = 1000;
       let points = [];
       t = 0
 
       p.setup = () => {
         p.createCanvas(containerRef.current.offsetWidth, containerRef.current.offsetHeight);
         p.strokeWeight(5);
-        p.noiseSeed(seed)
         p.noiseDetail(5);
         p.stroke(0);
       };
@@ -35,13 +34,14 @@ const StockSketch = ({ seed }) => {
             normalizePoint(i, topLevel, bottomLevel)
           );
         }
-
+        
+        p.line()
         points.shift();
         while (points.length < MAX_POINTS) {
           points.push(getStockPoint(t));
         }
 
-        t+=0.001
+        t+=0.01
       };
 
       const normalizePoint = (i, t, b) => {
@@ -50,7 +50,7 @@ const StockSketch = ({ seed }) => {
       };
 
       const getStockPoint = (t) => {
-        return p.noise(t);
+        return p.noise(t, seed * 100);
       };
       
     };
