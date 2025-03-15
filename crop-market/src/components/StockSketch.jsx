@@ -8,11 +8,11 @@ const StockSketch = ({ seed }) => {
     const sketch = (p) => {
       const MAX_POINTS = 500;
       let points = [];
-      let t = seed; // Use the seed prop
 
       p.setup = () => {
         p.createCanvas(containerRef.current.offsetWidth, containerRef.current.offsetHeight);
         p.strokeWeight(5);
+        p.noiseSeed(seed)
         p.noiseDetail(5);
         p.stroke(0);
       };
