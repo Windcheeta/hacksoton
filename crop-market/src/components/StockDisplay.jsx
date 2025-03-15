@@ -9,7 +9,7 @@ const StockDisplay = ({ seed, t, value }) => {
           <span style={{ fontSize: '24px' }}>{value}</span>
         </div>
         <div style={{ flex: 1 }} className = "stockLine">
-          <StockSketch seed={seed} time={t} />
+          <StockSketch seed={seed} t={10} />
         </div>
         
       </div>
