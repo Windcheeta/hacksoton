@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 
-const StockSketch = ({ seed }) => {
+const StockSketch = ({ seed, t }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -35,10 +35,8 @@ const StockSketch = ({ seed }) => {
 
         points.shift();
         while (points.length < MAX_POINTS) {
-          points.push(getStockPoint(t));
-          t += 0.005;
+          points.push(getStockPoint({t}));
         }
-        t += 0.001;
       };
 
       const normalizePoint = (i, t, b) => {
