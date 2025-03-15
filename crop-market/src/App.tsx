@@ -5,11 +5,11 @@ import paper from './pics/paper.jpg';
 
 const App = () => {
   const [seed, setSeed] = useState(0);
-  const [time, setTime] = useState(0);
+  const [t, setT] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime((time) => {
+      setT((time) => {
         return time + 1});
     }, 100);
     return () => clearInterval(interval);
@@ -21,10 +21,10 @@ const App = () => {
       <h1 style={{justifySelf:"center", margin: "20px"}} >Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={0} value={2000} time={time} />
+          <StockDisplay seed={0} value={2000} />
         </div>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={1} value={1000} time={time}/>
+          <StockDisplay seed={1} value={1000}/>
         </div>
       </div>
     </div>

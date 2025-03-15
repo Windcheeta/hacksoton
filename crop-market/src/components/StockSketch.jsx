@@ -2,8 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 let t
 let rn
-
-const StockSketch = ({ seed, time }) => {
+const StockSketch = ({ seed }) => {
   const containerRef = useRef(null);
   
 
@@ -39,9 +38,9 @@ const StockSketch = ({ seed, time }) => {
         p.line()
         points.shift();
         while (points.length < MAX_POINTS) {
-          points.push(getStockPoint(t, seed));
+          points.push(getStockPoint(t));
         }
-        console.log(time)
+
         t+=0.01
       };
 
@@ -50,8 +49,8 @@ const StockSketch = ({ seed, time }) => {
         return ((points[i] - b) / (t - b)) * p.height;
       };
 
-      const getStockPoint = (t, s) => {
-        return p.noise(t, s * 100);
+      const getStockPoint = (t) => {
+        return p.noise(t, seed * 100);
       };
       
     };
@@ -63,18 +62,16 @@ const StockSketch = ({ seed, time }) => {
     return () => {
       p5Instance.remove();
     };
-  }, [seed, time]);
+  }, [seed]);
   
   return <div ref={containerRef} />;
 };
-
-
 
 export const getT = () => {
   return t
 }
 
-export const getP = (t) => {
+export const getP = () => {
   return rn
 }
 
