@@ -48,114 +48,128 @@ const WS_URL = "wss://api.nestjs-query.refine.dev/graphql";
 const gqlClient = new GraphQLClient(API_URL);
 const wsClient = createClient({ url: WS_URL });
 
-function App() {
-  return (
-    <BrowserRouter>
-      <GitHubBanner />
-      <RefineKbarProvider>
-        <ColorModeContextProvider>
-          <AntdApp>
-            <DevtoolsProvider>
-              <Refine
-                dataProvider={dataProvider(gqlClient)}
-                liveProvider={liveProvider(wsClient)}
-                notificationProvider={useNotificationProvider}
-                routerProvider={routerBindings}
-                authProvider={authProvider}
-                resources={[
-                  {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                  {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                ]}
-                options={{
-                  syncWithLocation: true,
-                  warnWhenUnsavedChanges: true,
-                  useNewQueryKeys: true,
-                  projectId: "xz6G1f-tcr1hb-TOajoY",
-                  liveMode: "auto",
-                }}
-              >
-                <Routes>
-                  <Route
-                    element={
-                      <Authenticated
-                        key="authenticated-inner"
-                        fallback={<CatchAllNavigate to="/login" />}
-                      >
-                        <ThemedLayoutV2
-                          Header={Header}
-                          Sider={(props) => <ThemedSiderV2 {...props} fixed />}
-                        >
-                          <Outlet />
-                        </ThemedLayoutV2>
-                      </Authenticated>
-                    }
-                  >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
-                    </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
-                    </Route>
-                    <Route path="*" element={<ErrorComponent />} />
-                  </Route>
-                  <Route
-                    element={
-                      <Authenticated
-                        key="authenticated-outer"
-                        fallback={<Outlet />}
-                      >
-                        <NavigateToResource />
-                      </Authenticated>
-                    }
-                  >
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route
-                      path="/forgot-password"
-                      element={<ForgotPassword />}
-                    />
-                  </Route>
-                </Routes>
+// function App() {
+//   return (
+//     <BrowserRouter>
+//       <GitHubBanner />
+//       <RefineKbarProvider>
+//         <ColorModeContextProvider>
+//           <AntdApp>
+//             <DevtoolsProvider>
+//               <Refine
+//                 dataProvider={dataProvider(gqlClient)}
+//                 liveProvider={liveProvider(wsClient)}
+//                 notificationProvider={useNotificationProvider}
+//                 routerProvider={routerBindings}
+//                 authProvider={authProvider}
+//                 resources={[
+//                   {
+//                     name: "blog_posts",
+//                     list: "/blog-posts",
+//                     create: "/blog-posts/create",
+//                     edit: "/blog-posts/edit/:id",
+//                     show: "/blog-posts/show/:id",
+//                     meta: {
+//                       canDelete: true,
+//                     },
+//                   },
+//                   {
+//                     name: "categories",
+//                     list: "/categories",
+//                     create: "/categories/create",
+//                     edit: "/categories/edit/:id",
+//                     show: "/categories/show/:id",
+//                     meta: {
+//                       canDelete: true,
+//                     },
+//                   },
+//                 ]}
+//                 options={{
+//                   syncWithLocation: true,
+//                   warnWhenUnsavedChanges: true,
+//                   useNewQueryKeys: true,
+//                   projectId: "xz6G1f-tcr1hb-TOajoY",
+//                   liveMode: "auto",
+//                 }}
+//               >
+//                 <Routes>
+//                   <Route
+//                     element={
+//                       <Authenticated
+//                         key="authenticated-inner"
+//                         fallback={<CatchAllNavigate to="/login" />}
+//                       >
+//                         <ThemedLayoutV2
+//                           Header={Header}
+//                           Sider={(props) => <ThemedSiderV2 {...props} fixed />}
+//                         >
+//                           <Outlet />
+//                         </ThemedLayoutV2>
+//                       </Authenticated>
+//                     }
+//                   >
+//                     <Route
+//                       index
+//                       element={<NavigateToResource resource="blog_posts" />}
+//                     />
+//                     <Route path="/blog-posts">
+//                       <Route index element={<BlogPostList />} />
+//                       <Route path="create" element={<BlogPostCreate />} />
+//                       <Route path="edit/:id" element={<BlogPostEdit />} />
+//                       <Route path="show/:id" element={<BlogPostShow />} />
+//                     </Route>
+//                     <Route path="/categories">
+//                       <Route index element={<CategoryList />} />
+//                       <Route path="create" element={<CategoryCreate />} />
+//                       <Route path="edit/:id" element={<CategoryEdit />} />
+//                       <Route path="show/:id" element={<CategoryShow />} />
+//                     </Route>
+//                     <Route path="*" element={<ErrorComponent />} />
+//                   </Route>
+//                   <Route
+//                     element={
+//                       <Authenticated
+//                         key="authenticated-outer"
+//                         fallback={<Outlet />}
+//                       >
+//                         <NavigateToResource />
+//                       </Authenticated>
+//                     }
+//                   >
+//                     <Route path="/login" element={<Login />} />
+//                     <Route path="/register" element={<Register />} />
+//                     <Route
+//                       path="/forgot-password"
+//                       element={<ForgotPassword />}
+//                     />
+//                   </Route>
+//                 </Routes>
 
-                <RefineKbar />
-                <UnsavedChangesNotifier />
-                <DocumentTitleHandler />
-              </Refine>
-              <DevtoolsPanel />
-            </DevtoolsProvider>
-          </AntdApp>
-        </ColorModeContextProvider>
-      </RefineKbarProvider>
-    </BrowserRouter>
+//                 <RefineKbar />
+//                 <UnsavedChangesNotifier />
+//                 <DocumentTitleHandler />
+//               </Refine>
+//               <DevtoolsPanel />
+//             </DevtoolsProvider>
+//           </AntdApp>
+//         </ColorModeContextProvider>
+//       </RefineKbarProvider>
+//     </BrowserRouter>
+//   );
+// }
+import React, {useState} from 'react';
+import StockSketch from './pages/StockSketch';
+
+const App = () => {
+  const [seed, setSeed] = useState(0); // Initialize seed state
+
+  return (
+    <div>
+      <h1>Stock Market Visualization</h1>
+      <StockSketch seed={9} />
+      <StockSketch seed={10} />
+    </div>
   );
-}
+};
 
 export default App;
