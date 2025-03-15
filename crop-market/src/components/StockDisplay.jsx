@@ -4,7 +4,7 @@ import StockSketch from './StockSketch';
 import s, {getP} from './StockSketch';
 import cloth from '../pics/cloth.jpg';
 
-const StockDisplay = ({ seed, value}) => {
+const StockDisplay = ({ seed, value }) => {
     return (
       <div style={{ display: 'flex', alignItems: 'center'}} className = "stockContainer">
         <div style={{flex: 0 }}>

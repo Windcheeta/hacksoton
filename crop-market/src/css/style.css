@@ -19,10 +19,6 @@
   --main-bg-color: #ffffff14;
   --box-bg-color: #ffffff30;
   --box-border-radius: 8px;
-  --guess-bg-color: #ffffff30;
-  --guess-padding: 0.5rem;
-  --guess-margin: 3px;
-  --guess-font-size: 1em;
 }
 
 :root {

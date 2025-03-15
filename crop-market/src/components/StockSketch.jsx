@@ -26,7 +26,7 @@ const StockSketch = ({ seed }) => {
         let gap = p.width / points.length;
 
         for (let i = 1; i < points.length; i++) {
-          p.stroke(points[0] - points[i] < 0 ? [100, 0, 0] : [0, 100, 0]);
+          //p.stroke(points[0] - points[i] < 0 ? [100, 0, 0] : [0, 100, 0]);
           p.line(
             (i - 1) * gap,
             normalizePoint(i - 1, topLevel, bottomLevel),
@@ -71,7 +71,6 @@ export const getT = () => {
 }
 
 export const getP = () => {
-  console.log(rn)
   return rn
 }
 
