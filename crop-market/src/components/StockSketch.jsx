@@ -35,8 +35,7 @@ const StockSketch = ({ seed, t }) => {
 
         points.shift();
         while (points.length < MAX_POINTS) {
-          points.push(getStockPoint({t}));
-          console.log(points)
+          points.push(getStockPoint(t));
         }
       };
 

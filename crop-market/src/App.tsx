@@ -10,10 +10,10 @@ const App = () => {
       <h1>Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={0} time={t} value="$1000" />
+          <StockDisplay seed={0} t={2} value="$1000" />
         </div>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={1} time={t} value="$1050" />
+          <StockDisplay seed={1} t={3} value="$1050" />
         </div>
       </div>
     </div>
