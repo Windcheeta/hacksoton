@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import StockDisplay from './components/StockDisplay.jsx';
 import s, {values} from './components/StockSketch';
+import paper from './pics/paper.jpg';
 
 const App = () => {
   const [seed, setSeed] = useState(0);
@@ -20,6 +21,7 @@ const App = () => {
 
   return (
     <div>
+      <img src={paper} style={{position: "absolute", width: "100%", height: "100%", zIndex: -1}}></img>
       <h1>Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
