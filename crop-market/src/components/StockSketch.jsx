@@ -41,10 +41,11 @@ const StockSketch = ({ seed }) => {
           points.push(getStockPoint(t));
         }
 
-        t+=0.01
+        t+=0.001
       };
 
       const normalizePoint = (i, t, b) => {
+        rn = points[points.length-1]
         return ((points[i] - b) / (t - b)) * p.height;
       };
 
@@ -54,16 +55,24 @@ const StockSketch = ({ seed }) => {
       
     };
 
+    
     const p5Instance = new p5(sketch, containerRef.current);
-
+    
     // Cleanup on component unmount
     return () => {
       p5Instance.remove();
     };
   }, [seed]);
-
+  
   return <div ref={containerRef} />;
 };
-export const values = 123
+export const getT = () => {
+  return t
+}
+
+export const getP = () => {
+  console.log(rn)
+  return rn
+}
 
 export default StockSketch;
