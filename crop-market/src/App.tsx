@@ -18,7 +18,8 @@ const App = () => {
   }, []);
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div>
+      <img style={{ width: 100% }} src="./pics/paper.jpg"></img>
       <h1>Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
