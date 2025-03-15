@@ -17,7 +17,7 @@ const StockDisplay = ({ seed, value }) => {
           <button className='buysell' style= {{ background: "rgb(255,0,0)" }} >sell</button>
         </div>
         <div style={{ flex: 1 }} className = "stockLine">
-          <StockSketch seed={seed} />
+          <StockSketch seed={seed}/>
         </div>
         
       </div>

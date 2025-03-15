@@ -66,6 +66,7 @@ const StockSketch = ({ seed }) => {
   
   return <div ref={containerRef} />;
 };
+
 export const getT = () => {
   return t
 }
