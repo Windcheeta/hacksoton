@@ -162,12 +162,14 @@ import StockSketch from './pages/StockSketch';
 
 const App = () => {
   const [seed, setSeed] = useState(0); // Initialize seed state
+  const width = 100;
+  const height = 100;
 
   return (
     <div>
       <h1>Stock Market Visualization</h1>
-      <StockSketch seed={9} />
-      <StockSketch seed={10} />
+      <StockSketch seed={0} width={width} height={height} />
+      <StockSketch seed={1} width={width} height={height} />
     </div>
   );
 };

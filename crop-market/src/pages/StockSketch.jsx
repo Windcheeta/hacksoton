@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 
-const StockSketch = ({ seed }) => {
+const StockSketch = ({ seed, width, height }) => {
   const sketchRef = useRef();
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const StockSketch = ({ seed }) => {
       let t = seed; // Use the seed prop
 
       p.setup = () => {
-        p.createCanvas(p.windowWidth, p.windowHeight);
+        p.createCanvas(width, height);
         p.strokeWeight(5);
         p.noiseDetail(5);
         p.stroke(0);
@@ -22,7 +22,7 @@ const StockSketch = ({ seed }) => {
         p.clear();
         let topLevel = points.reduce((a, b) => p.max(a, b), -10) + 0.1;
         let bottomLevel = points.reduce((a, b) => p.min(a, b), 10) - 0.1;
-        let gap = p.windowWidth / points.length;
+        let gap = width / points.length;
 
         for (let i = 1; i < points.length; i++) {
           p.stroke(points[0] - points[i] < 0 ? [100, 0, 0] : [0, 100, 0]);
@@ -50,16 +50,13 @@ const StockSketch = ({ seed }) => {
       };
 
       const normalizePoint = (i, t, b) => {
-        return ((points[i] - b) / (t - b)) * p.windowHeight;
+        return ((points[i] - b) / (t - b)) * height;
       };
 
       const getStockPoint = (t) => {
         return p.noise(t);
       };
-
-      p.windowResized = () => {
-        p.resizeCanvas(p.windowWidth, p.windowHeight);
-      };
+      
     };
 
     const p5Instance = new p5(sketch, sketchRef.current);
