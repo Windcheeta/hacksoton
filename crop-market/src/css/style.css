@@ -1,13 +1,18 @@
-.stockLine {
-  border-style: solid;
+.stockLine, .stockContainer {
   border-radius: 10px;
+  background: rgba(0,0,0, 0.4);
 }
 
 .stockContainer {
-  border-style:solid;
-  border-radius: 10px;
   padding: 10px;
   margin: 10px;
+}
+
+.buysell {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  margin:5px
 }
 
 :root {
