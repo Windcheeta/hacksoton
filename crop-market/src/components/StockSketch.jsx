@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 
-const StockSketch = ({ seed, t }) => {
+const StockSketch = ({ seed, time }) => {
   const containerRef = useRef(null);
+
 
   useEffect(() => {
     const sketch = (p) => {
@@ -35,7 +36,7 @@ const StockSketch = ({ seed, t }) => {
 
         points.shift();
         while (points.length < MAX_POINTS) {
-          points.push(getStockPoint(t));
+          points.push(getStockPoint(time));
         }
       };
 
@@ -46,6 +47,7 @@ const StockSketch = ({ seed, t }) => {
       const getStockPoint = (t) => {
         return p.noise(t);
       };
+      
     };
 
     const p5Instance = new p5(sketch, containerRef.current);
