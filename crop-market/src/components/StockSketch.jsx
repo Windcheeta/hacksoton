@@ -1,18 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 
-const StockSketch = ({ seed, width, height }) => {
-  const sketchRef = useRef();
+const StockSketch = ({ seed }) => {
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const sketch = (p) => {
       const MAX_POINTS = 500;
-      const PADDING = 100;
       let points = [];
       let t = seed; // Use the seed prop
 
       p.setup = () => {
-        p.createCanvas(width, height);
+        p.createCanvas(containerRef.current.offsetWidth, containerRef.current.offsetHeight);
         p.strokeWeight(5);
         p.noiseDetail(5);
         p.stroke(0);
@@ -22,7 +21,7 @@ const StockSketch = ({ seed, width, height }) => {
         p.clear();
         let topLevel = points.reduce((a, b) => p.max(a, b), -10) + 0.1;
         let bottomLevel = points.reduce((a, b) => p.min(a, b), 10) - 0.1;
-        let gap = width / points.length;
+        let gap = p.width / points.length;
 
         for (let i = 1; i < points.length; i++) {
           p.stroke(points[0] - points[i] < 0 ? [100, 0, 0] : [0, 100, 0]);
@@ -34,13 +33,6 @@ const StockSketch = ({ seed, width, height }) => {
           );
         }
 
-        p.line(
-          0,
-          normalizePoint(0, topLevel, bottomLevel),
-          p.windowWidth,
-          normalizePoint(0, topLevel, bottomLevel)
-        );
-
         points.shift();
         while (points.length < MAX_POINTS) {
           points.push(getStockPoint(t));
@@ -50,23 +42,23 @@ const StockSketch = ({ seed, width, height }) => {
       };
 
       const normalizePoint = (i, t, b) => {
-        return ((points[i] - b) / (t - b)) * height;
+        return ((points[i] - b) / (t - b)) * p.height;
       };
 
       const getStockPoint = (t) => {
         return p.noise(t);
       };
-      
     };
 
-    const p5Instance = new p5(sketch, sketchRef.current);
+    const p5Instance = new p5(sketch, containerRef.current);
 
+    // Cleanup on component unmount
     return () => {
       p5Instance.remove();
     };
-  }, [seed]); // Add seed to dependency array
+  }, [seed]);
 
-  return <div ref={sketchRef}></div>;
+  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default StockSketch;

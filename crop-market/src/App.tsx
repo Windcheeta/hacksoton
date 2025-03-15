@@ -158,18 +158,20 @@ const wsClient = createClient({ url: WS_URL });
 //   );
 // }
 import React, {useState} from 'react';
-import StockSketch from './pages/StockSketch';
+import StockSketch from './components/StockSketch';
 
 const App = () => {
-  const [seed, setSeed] = useState(0); // Initialize seed state
-  const width = 100;
-  const height = 100;
+  const [seed, setSeed] = useState(0); // Initialize seed state]
 
   return (
     <div>
       <h1>Stock Market Visualization</h1>
-      <StockSketch seed={0} width={width} height={height} />
-      <StockSketch seed={1} width={width} height={height} />
+      <div>
+        <StockSketch seed={0}/>
+      </div>
+      <div>
+        <StockSketch seed={1}/>
+      </div>
     </div>
   );
 };
