@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
-
+let t
+let rn
 const StockSketch = ({ seed, time }) => {
   const containerRef = useRef(null);
 
@@ -45,6 +46,8 @@ const StockSketch = ({ seed, time }) => {
       };
 
       const getStockPoint = (t) => {
+        a = t
+        out = points 
         return p.noise(t);
       };
       
@@ -60,5 +63,6 @@ const StockSketch = ({ seed, time }) => {
 
   return <div ref={containerRef} />;
 };
+export const values = 123
 
 export default StockSketch;
