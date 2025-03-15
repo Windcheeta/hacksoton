@@ -58,7 +58,7 @@ const StockSketch = ({ seed }) => {
     };
   }, [seed]);
 
-  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={containerRef} />;
 };
 
 export default StockSketch;

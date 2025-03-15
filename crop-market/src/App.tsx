@@ -164,9 +164,9 @@ const App = () => {
   const [seed, setSeed] = useState(0);
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100vw', height: '100vh', padding:'2em'}}>
       <h1>Stock Market Visualization</h1>
-      <div style={{ display: 'flex', flexDirection: 'row', height: 'calc(100% - 50px)' }}>
+      <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
           <StockDisplay seed={0} value="$1000" />
         </div>
