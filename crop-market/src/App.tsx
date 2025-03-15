@@ -20,17 +20,15 @@ const App = () => {
 
   return (
     <div>
-      <img style={{ width: 100% }} src="./pics/paper.jpg"></img>
       <h1>Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={0} t={4} value="$1000" />
+          <StockDisplay seed={0} value="$1000" />
         </div>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={1} t={1} value="$1050" />
+          <StockDisplay seed={1} value="$1050" />
         </div>
       </div>
-      <button></button>
     </div>
   );
 };

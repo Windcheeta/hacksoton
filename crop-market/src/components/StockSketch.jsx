@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 let t
 let rn
-const StockSketch = ({ seed, time }) => {
+const StockSketch = ({ seed }) => {
   const containerRef = useRef(null);
 
 
@@ -10,6 +10,7 @@ const StockSketch = ({ seed, time }) => {
     const sketch = (p) => {
       const MAX_POINTS = 500;
       let points = [];
+      t = 0
 
       p.setup = () => {
         p.createCanvas(containerRef.current.offsetWidth, containerRef.current.offsetHeight);
@@ -37,8 +38,10 @@ const StockSketch = ({ seed, time }) => {
 
         points.shift();
         while (points.length < MAX_POINTS) {
-          points.push(getStockPoint(time));
+          points.push(getStockPoint(t));
         }
+
+        t+=0.01
       };
 
       const normalizePoint = (i, t, b) => {
@@ -46,8 +49,6 @@ const StockSketch = ({ seed, time }) => {
       };
 
       const getStockPoint = (t) => {
-        a = t
-        out = points 
         return p.noise(t);
       };
       
