@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import StockDisplay from './components/StockDisplay.jsx';
+import s, {values} from './components/StockSketch';
 
 const App = () => {
   const [seed, setSeed] = useState(0);
@@ -8,11 +9,11 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setT((time) => {
-        console.log(time, t)
+        console.log(values)
         return time + 1});
     }, 100); // Increment every second
 
-    console.log(interval)
+    //console.log(interval)
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
@@ -23,10 +24,10 @@ const App = () => {
       <h1>Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={0} t={t} value="$1000" />
+          <StockDisplay seed={0} t={4} value="$1000" />
         </div>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={1} t={t} value="$1050" />
+          <StockDisplay seed={1} t={1} value="$1050" />
         </div>
       </div>
       <button></button>
