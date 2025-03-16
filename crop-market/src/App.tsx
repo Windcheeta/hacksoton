@@ -4,19 +4,22 @@ import paper from './pics/paper.jpg';
 import {disaster} from './components/crashes.js'
 
 const App = () => {
+  let temp = [["none",0,0]]
   const [seed, setSeed] = useState(0);
   const [time, setTime] = useState(0);
-  const [disr, setDisr] = useState([["famine",-100000,2]]);
+  const [disr, setDisr] = useState(temp);
   const probabilities = Array.from({ length: 8 }, () => Math.floor(Math.random() * 100));
-  
   useEffect(() => {
     const interval = setInterval(() => {
-
+      if (time > 0.20 && time <0.21 || time>0.6 && time <0.61 || time>1 && time <1.01) {
+        setDisr([...disr, disaster(probabilities)])
+        console.log(disr)
+      }
       setTime((time) => {
         return time + 0.01});
     }, 100);
     return () => clearInterval(interval);
-  }, [disr]);
+  }, [time,disr]);
 
   return (
     <div>
