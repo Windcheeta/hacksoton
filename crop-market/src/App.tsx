@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import StockDisplay from './components/StockDisplay.jsx';
 import paper from './pics/paper.jpg';
 import {disaster} from './components/crashes.js'
-import {cornico} from './pics/cornico'
-import {wheatico} from './pics/wheatico'
+import {cornico} from './pics/cornico.png'
+import {wheatico} from './pics/wheatico.png'
 
 const App = () => {
   let temp = [["none",1,1]]
