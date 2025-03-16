@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import p5 from 'p5';
 import StockSketch from './StockSketch';
+import StockChart from './StockChart';
 import s, {getP} from './StockSketch';
 import cloth from '../pics/cloth.jpg';
 
@@ -17,7 +18,7 @@ const StockDisplay = ({ seed, value }) => {
           <button className='buysell' style= {{ background: "rgb(255,0,0)" }} >sell</button>
         </div>
         <div style={{ flex: 1 }} className = "stockLine">
-          <StockSketch seed={seed}/>
+          <StockChart points = {Array(100).fill(0).map( (_,i) => i )}/>
         </div>
         
       </div>
