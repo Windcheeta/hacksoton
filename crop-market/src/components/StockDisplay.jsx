@@ -1,12 +1,36 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import p5 from 'p5';
-import StockSketch from './StockSketch';
 import StockChart from './StockChart';
 import s, {getP} from './StockSketch';
 import cloth from '../pics/cloth.jpg';
 
 const StockDisplay = ({ seed, value }) => {
-    return (
+
+  const containerRef = useRef(null);
+  const [points, setPoints] = useState([]);
+  const MAX_POINTS = 1000;
+  let t = 0;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPoints((prevPoints) => {
+        const newPoints = [...prevPoints, getStockPoint(t, seed)];
+        if (newPoints.length > MAX_POINTS) {
+          newPoints.shift();
+        }
+        t += 0.01;
+        return newPoints;
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [seed]);
+
+  const getStockPoint = (t, s) => {
+    return p5.prototype.noise(t, s * 100);
+  };
+
+  return (
       <div style={{ display: 'flex', alignItems: 'center'}} className = "stockContainer">
         <div style={{flex: 0 }}>
           <img src={cloth} style={{height:"100px"}}>
@@ -22,8 +46,8 @@ const StockDisplay = ({ seed, value }) => {
         </div>
         
       </div>
-    );
-  };
+  );
+};
   
   export default StockDisplay;
   
