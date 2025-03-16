@@ -1,31 +1,26 @@
 import React, { useRef, useEffect, useState } from 'react';
 import p5 from 'p5';
 import StockChart from './StockChart';
-import s, {getP} from './StockSketch';
-import s, {getT,getStockPoint} from './StockSketch';
 import cloth from '../pics/cloth.jpg';
-
-const StockDisplay = ({ seed, value }) => {
+const StockDisplay = ({ seed, value, time}) => {
 
   const containerRef = useRef(null);
   const [points, setPoints] = useState([]);
-  const MAX_POINTS = 1000;
-  let t = 0;
+  const MAX_POINTS = 50;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setPoints((prevPoints) => {
-        const newPoints = [...prevPoints, getStockPoint(t, seed)];
+        const newPoints = [...prevPoints, getStockPoint(time, seed)];
         if (newPoints.length > MAX_POINTS) {
           newPoints.shift();
         }
-        t += 0.01;
         return newPoints;
       });
     }, 100);
 
     return () => clearInterval(interval);
-  }, [seed]);
+  }, [seed,time]);
 
   const getStockPoint = (t, s) => {
     return p5.prototype.noise(t, s * 100);
@@ -38,12 +33,12 @@ const StockDisplay = ({ seed, value }) => {
           </img>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', flexDirection: "column"}} className = "stockValue">
-          <span style={{ fontSize: '24px' }}>{"$"+String(Math.round((value*(1-getStockPoint(time,seed))*E)))}</span>
-          <button className='buysell' style= {{ background: "rgb(0,255,0)" }} function={changeEffect}>buy</button>
+        <span style={{ fontSize: '24px' }}>{"$"+String(Math.round((value*(getStockPoint(time,seed)))))}</span>
+          <button className='buysell' style= {{ background: "rgb(0,255,0)" }} >buy</button>
           <button className='buysell' style= {{ background: "rgb(255,0,0)" }} >sell</button>
         </div>
         <div style={{ flex: 1 }} className = "stockLine">
-          <StockChart points = {Array(100).fill(0).map( (_,i) => i )}/>
+          <StockChart points = {points}/>
         </div>
         
       </div>

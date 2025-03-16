@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTime((time) => {
-        return time + 1});
+        return time + 0.01});
     }, 100);
     return () => clearInterval(interval);
   }, []);

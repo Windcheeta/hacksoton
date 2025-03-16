@@ -9,22 +9,21 @@ const StockChart = ({ points }) => {
     labels: points.map((_, index) => index),
     datasets: [
       {
-        label: 'Stock Price',
         data: points,
-        borderColor: 'rgba(75, 192, 192, 1)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgb(10, 32, 87)',
+        backgroundColor: 'rgba(174, 136, 12, 0.2)',
         fill: true,
-        tension: 0.1,
+        tension: 0,
       },
     ],
   };
 
   const options = {
-    responsive: true,
+    responsive: false,
     scales: {
       x: {
         title: {
-          display: true,
+          display: false,
           text: 'Time',
         },
       },
