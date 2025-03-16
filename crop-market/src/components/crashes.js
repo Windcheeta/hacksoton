@@ -1,9 +1,9 @@
-export function disaster(seed) {
-    out = weightedRandom(Object.keys(events),probability)
-    return [ out,events[out]]
+export function disaster(probs) {
+    let out = weightedRandom(Object.keys(events),probs)
+    return [out,events[out]]
 }
 
-var probability = [1,1,1,1,1,1,1,1]
+
 // name effect, time, 
 const events = {
     "Draught": [-10,1],

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import p5 from 'p5';
 import StockChart from './StockChart';
 import cloth from '../pics/cloth.jpg';
-const StockDisplay = ({ seed, value, time}) => {
+const StockDisplay = ({ seed, value, time, disaster}) => {
 
   const containerRef = useRef(null);
   const [points, setPoints] = useState([]);
@@ -11,7 +11,7 @@ const StockDisplay = ({ seed, value, time}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setPoints((prevPoints) => {
-        const newPoints = [...prevPoints, value*(getStockPoint(time,seed))];
+        const newPoints = [...prevPoints, value*(getStockPoint(time,seed))*disaster[1][0]];
         if (newPoints.length > MAX_POINTS) {
           newPoints.shift();
         }
@@ -20,7 +20,7 @@ const StockDisplay = ({ seed, value, time}) => {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [seed,time]);
+  }, [seed,time,disaster]);
 
   const getStockPoint = (t, s) => {
     return p5.prototype.noise(t, s * 100);
@@ -33,7 +33,7 @@ const StockDisplay = ({ seed, value, time}) => {
           </img>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', flexDirection: "column"}} className = "stockValue">
-        <span style={{ fontSize: '24px' }}>{"$"+String(Math.round((value*(getStockPoint(time,seed)))))}</span>
+        <span style={{ fontSize: '24px' }}>{"$"+String(Math.round((value*(getStockPoint(time,seed))*disaster[1][0])))}</span>
           <button className='buysell' style= {{ background: "rgb(0,255,0)" }} >buy</button>
           <button className='buysell' style= {{ background: "rgb(255,0,0)" }} >sell</button>
         </div>
