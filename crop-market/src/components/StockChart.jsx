@@ -9,6 +9,7 @@ const StockChart = ({ points }) => {
     labels: points.map((_, index) => index),
     datasets: [
       {
+        label: 'Stock Price',
         data: points,
         borderColor: 'rgb(10, 32, 87)',
         backgroundColor: 'rgba(174, 136, 12, 0.2)',
@@ -19,7 +20,8 @@ const StockChart = ({ points }) => {
   };
 
   const options = {
-    responsive: false,
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         title: {
@@ -36,7 +38,11 @@ const StockChart = ({ points }) => {
     },
   };
 
-  return <Line data={data} options={options} />;
+  return (
+    <div style={{ width: '98%', height: '200px' }}>
+      <Line data={data} options={options} />
+    </div>
+  );
 };
 
 export default StockChart;

@@ -11,7 +11,7 @@ const StockDisplay = ({ seed, value, time}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setPoints((prevPoints) => {
-        const newPoints = [...prevPoints, getStockPoint(time, seed)];
+        const newPoints = [...prevPoints, value*(getStockPoint(time,seed))];
         if (newPoints.length > MAX_POINTS) {
           newPoints.shift();
         }
