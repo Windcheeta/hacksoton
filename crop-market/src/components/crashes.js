@@ -1,6 +1,6 @@
 export function disaster(probs) {
     let out = weightedRandom(Object.keys(events),probs)
-    return [out,events[out]]
+    return [out,events[out][0],events[out][1]]
 }
 
 

@@ -6,13 +6,12 @@ import {disaster} from './components/crashes.js'
 const App = () => {
   const [seed, setSeed] = useState(0);
   const [time, setTime] = useState(0);
-  const [disr, setDisr] = useState<number[]>([]);
+  const [disr, setDisr] = useState([["famine",-100000,2]]);
   const probabilities = Array.from({ length: 8 }, () => Math.floor(Math.random() * 100));
   
   useEffect(() => {
     const interval = setInterval(() => {
-      setDisr(disaster(probabilities));
-      console.log(disr[1][0]);
+
       setTime((time) => {
         return time + 0.01});
     }, 100);
