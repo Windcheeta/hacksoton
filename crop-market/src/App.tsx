@@ -6,19 +6,22 @@ import {cornico} from './pics/cornico'
 import {wheatico} from './pics/wheatico'
 
 const App = () => {
+  let temp = [["none",1,1]]
   const [seed, setSeed] = useState(0);
   const [time, setTime] = useState(0);
-  const [disr, setDisr] = useState([["famine",-100000,2]]);
+  const [disr, setDisr] = useState(temp);
   const probabilities = Array.from({ length: 8 }, () => Math.floor(Math.random() * 100));
-  
   useEffect(() => {
     const interval = setInterval(() => {
-
+      if (time%1 > 0.20 && time%1 <0.21) {
+        setDisr([...disr, disaster(probabilities)])
+        console.log(disr)
+      }
       setTime((time) => {
         return time + 0.01});
     }, 100);
     return () => clearInterval(interval);
-  }, [disr]);
+  }, [time,disr]);
 
   return (
     <div>
