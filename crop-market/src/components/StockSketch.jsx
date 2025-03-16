@@ -1,17 +1,16 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import p5 from 'p5';
 let t
 let rn
-const StockSketch = ({ seed }) => {
+
+const StockSketch = ({ seed, time }) => {
   const containerRef = useRef(null);
-  
+  const [points, setPoints] = useState([]);
+  const MAX_POINTS = 1000;
+  let t = 0;
 
   useEffect(() => {
     const sketch = (p) => {
-      const MAX_POINTS = 1000;
-      let points = [];
-      t = 0
-
       p.setup = () => {
         p.createCanvas(containerRef.current.offsetWidth, containerRef.current.offsetHeight);
         p.strokeWeight(5);
@@ -21,49 +20,53 @@ const StockSketch = ({ seed }) => {
 
       p.draw = () => {
         p.clear();
-        let topLevel = points.reduce((a, b) => p.max(a, b), -10) + 0.1;
-        let bottomLevel = points.reduce((a, b) => p.min(a, b), 10) - 0.1;
-        let gap = p.width / points.length;
-
-        for (let i = 1; i < points.length; i++) {
-          //p.stroke(points[0] - points[i] < 0 ? [100, 0, 0] : [0, 100, 0]);
-          p.line(
-            (i - 1) * gap,
-            normalizePoint(i - 1, topLevel, bottomLevel),
-            i * gap,
-            normalizePoint(i, topLevel, bottomLevel)
-          );
+        if (points.length > 0) {
+          let topLevel = points.reduce((a, b) => Math.max(a, b), -10) + 0.1;
+          let bottomLevel = points.reduce((a, b) => Math.min(a, b), 10) - 0.1;
+          let gap = p.width / points.length;
+          for (let i = 1; i < points.length; i++) {
+            p.line(
+              (i - 1) * gap,
+              normalizePoint(points, i - 1, topLevel, bottomLevel, p.height),
+              i * gap,
+              normalizePoint(points, i, topLevel, bottomLevel, p.height)
+            );
+          }
         }
-        
-        p.line()
-        points.shift();
-        while (points.length < MAX_POINTS) {
-          points.push(getStockPoint(t));
-        }
-
-        t+=0.01
       };
-
-      const normalizePoint = (i, t, b) => {
-        rn = points[points.length-1]
-        return ((points[i] - b) / (t - b)) * p.height;
-      };
-
-      const getStockPoint = (t) => {
-        return p.noise(t, seed * 100);
-      };
-      
     };
 
-    
     const p5Instance = new p5(sketch, containerRef.current);
-    
+
     // Cleanup on component unmount
     return () => {
       p5Instance.remove();
     };
+  }, [points]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPoints((prevPoints) => {
+        const newPoints = [...prevPoints, getStockPoint(t, seed)];
+        if (newPoints.length > MAX_POINTS) {
+          newPoints.shift();
+        }
+        t += 0.01;
+        return newPoints;
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
   }, [seed]);
-  
+
+  const normalizePoint = (points, i, topLevel, bottomLevel, height) => {
+    return ((points[i] - bottomLevel) / (topLevel - bottomLevel)) * height;
+  };
+
+  const getStockPoint = (t, s) => {
+    return p5.prototype.noise(t, s * 100);
+  };
+
   return <div ref={containerRef} />;
 };
 
@@ -71,7 +74,7 @@ export const getT = () => {
   return t
 }
 
-export const getP = () => {
+export const getP = (t) => {
   return rn
 }
 
