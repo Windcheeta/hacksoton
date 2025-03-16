@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import StockDisplay from './components/StockDisplay.jsx';
 import paper from './pics/paper.jpg';
 import {disaster} from './components/crashes.js'
+import {cornico} from './pics/cornico'
+import {wheatico} from './pics/wheatico'
 
 const App = () => {
   const [seed, setSeed] = useState(0);
@@ -24,10 +26,10 @@ const App = () => {
       <h1 style={{justifySelf:"center", margin: "20px"}} >Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={0} value={2000} time={time} disaster={disr} />
+          <StockDisplay seed={0} value={2000} time={time} disaster={disr} ico={cornico} />
         </div>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={1} value={1000} time={time} disaster={disr}/>
+          <StockDisplay seed={1} value={1000} time={time} disaster={disr} ico={wheatico}/>
         </div>
       </div>
     </div>
