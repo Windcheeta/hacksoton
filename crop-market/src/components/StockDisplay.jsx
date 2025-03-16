@@ -13,7 +13,7 @@ const StockDisplay = ({ seed, value, time, disaster}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setPoints((prevPoints) => {
-        const newPoints = [...prevPoints, value*(getStockPoint(time,seed))+unpackDis(disaster)];
+        const newPoints = [...prevPoints, value*(getStockPoint(time,seed))*unpackDis(disaster)];
         if (newPoints.length > MAX_POINTS) {
           newPoints.shift();
         }
@@ -29,9 +29,9 @@ const StockDisplay = ({ seed, value, time, disaster}) => {
   };
   
   const unpackDis = (disaster) => {
-    let sum = 0
+    let sum = 1
     for (let i = 0; i <disaster.length; i++){
-      sum += disaster[i][1]
+      sum *= disaster[i][1]
     }
     return sum
   }
@@ -43,7 +43,7 @@ const StockDisplay = ({ seed, value, time, disaster}) => {
           </img>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', flexDirection: "column"}} className = "stockValue">
-        <span style={{ fontSize: '24px' }}>{"$"+String(Math.round((value*(getStockPoint(time,seed))+unpackDis(disaster))))}</span>
+        <span style={{ fontSize: '24px' }}>{"$"+String(Math.round((value*(getStockPoint(time,seed))*unpackDis(disaster))))}</span>
           <button className='buysell' style= {{ background: "rgb(0,255,0)" }} >buy</button>
           <button className='buysell' style= {{ background: "rgb(255,0,0)" }} >sell</button>
         </div>
