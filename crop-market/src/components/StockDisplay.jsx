@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import p5 from 'p5';
 import StockChart from './StockChart';
-import cloth from '../pics/cloth.jpg';
+import icon from '../pics/wheatico.png';
 const StockDisplay = ({ seed, value, time}) => {
 
   const containerRef = useRef(null);
@@ -29,7 +29,7 @@ const StockDisplay = ({ seed, value, time}) => {
   return (
       <div style={{ display: 'flex', alignItems: 'center'}} className = "stockContainer">
         <div style={{flex: 0 }}>
-          <img src={cloth} style={{height:"100px"}}>
+          <img src={icon} style={{height:"100px"}}>
           </img>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', padding: '0 20px', flexDirection: "column"}} className = "stockValue">
