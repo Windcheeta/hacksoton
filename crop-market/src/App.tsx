@@ -10,18 +10,28 @@ const App = () => {
   const [seed, setSeed] = useState(0);
   const [time, setTime] = useState(0);
   const [disr, setDisr] = useState(temp);
+  const [timeTill, setTimeTill] = useState(Math.random()*5);
+  const [timeSince, setTimeSince] = useState(0);
+
+  
+
   const probabilities = Array.from({ length: 8 }, () => Math.floor(Math.random() * 100));
   useEffect(() => {
     const interval = setInterval(() => {
-      if (time%1 > 0.20 && time%1 <0.21) {
+      if (timeSince>timeTill) {
         setDisr([...disr, disaster(probabilities)])
-        console.log(disr)
+        setTimeTill(Math.random()*5);
+        setTimeSince(0);
+        console.log("DISASTER")
+      } else{
+        setTimeSince((timeSince+0.01));
+        setTime((time) => {
+          return time + 0.01});
+
       }
-      setTime((time) => {
-        return time + 0.01});
     }, 100);
     return () => clearInterval(interval);
-  }, [time,disr]);
+  }, [time,disr,timeTill,timeSince]);
 
   return (
     <div>
@@ -29,10 +39,10 @@ const App = () => {
       <h1 style={{justifySelf:"center", margin: "20px"}} >Stock Market Visualization</h1>
       <div style={{ display: 'flex', flexDirection: "column"}}>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={0} value={2000} time={time} disaster={disr} ico={cornico} />
+          <StockDisplay seed={12} value={2000} time={time} disaster={disr} ico={cornico} />
         </div>
         <div style={{ flex: 1, flexDirection: 'row'}}>
-          <StockDisplay seed={1} value={1000} time={time} disaster={disr} ico={wheatico}/>
+          <StockDisplay seed={100} value={1000} time={time} disaster={disr} ico={wheatico}/>
         </div>
       </div>
     </div>

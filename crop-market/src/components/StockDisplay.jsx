@@ -6,7 +6,7 @@ const StockDisplay = ({ seed, value, time, disaster, ico }) => {
 
   const containerRef = useRef(null);
   const [points, setPoints] = useState([]);
-  const MAX_POINTS = 50;
+  const MAX_POINTS = 100;
 
   useEffect(() => {
     const interval = setInterval(() => {
