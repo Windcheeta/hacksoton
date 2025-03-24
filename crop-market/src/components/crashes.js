@@ -7,13 +7,14 @@ export function disaster(probs) {
 // name effect, time, 
 const events = {
     "Draught": [0.85,1],
-    "rainfall": [1.2,0.5],
-    "famine": [1.1,0.5],
-    "jeremy clarkson": [1.00001,0.1],
-    "heatwave": [0.9,2],
-    "tariff": [0.92,4],
+    "rainfall": [1.4,0.5],
+    "famine": [1.3,0.5],
+    "jeremy clarkson": [1.1,0.1],
+    "heatwave": [0.7,2],
+    "tariff": [0.7,4],
     "inflation": [1.05,1],
-    "population increase": [1.2,10]
+    "population increase": [1.2,10],
+    "fire": [0.5,12]
 }
 
 function weightedRandom(elements, weights) {
